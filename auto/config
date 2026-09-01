@@ -15,4 +15,5 @@ lb config noauto \
   --keyring-packages ubuntu-keyring \
   --syslinux-theme "live-build" \
   --bootappend-live "boot=live components quiet splash" \
-  --apt-recommends true
+  --apt-recommends true \
+  --bootloader syslinux
