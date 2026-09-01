@@ -1,0 +1,27 @@
+name: Build RebuiltUbuntuX ISO
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build builder container
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          load: true
+          tags: rebuiltubuntux-builder:latest
+      - name: Build ISO inside container
+        run: |
+          mkdir -p output
+          docker run --rm --privileged -v "${{ github.workspace }}:/build" rebuiltubuntux-builder:latest bash -lc 'chmod +x auto/config auto/build auto/clean config/hooks/normal/*.hook.chroot && ./auto/clean && ./auto/config && ./auto/build && cp live-image-amd64.hybrid.iso output/RebuiltUbuntuX-amd64.iso'
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: RebuiltUbuntuX-amd64
+          path: output/RebuiltUbuntuX-amd64.iso
+          if-no-files-found: error

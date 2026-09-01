@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+echo "RebuiltUbuntuX" > /etc/hostname
+apt-get clean
