@@ -1,3 +1,15 @@
 #!/bin/sh
 set -e
-lb config noauto --distribution noble --architectures amd64 --binary-images iso-hybrid --archive-areas "main universe multiverse restricted" --bootappend-live "boot=live components quiet splash" --debian-installer none --apt-recommends true
+lb config noauto \
+  --distribution noble \
+  --architectures amd64 \
+  --binary-images iso-hybrid \
+  --archive-areas "main universe multiverse restricted" \
+  --mirror-bootstrap "http://archive.ubuntu.com/ubuntu" \
+  --mirror-chroot "http://archive.ubuntu.com/ubuntu" \
+  --mirror-binary "http://archive.ubuntu.com/ubuntu" \
+  --mirror-chroot-security "http://security.ubuntu.com/ubuntu" \
+  --mirror-binary-security "http://security.ubuntu.com/ubuntu" \
+  --bootappend-live "boot=live components quiet splash" \
+  --debian-installer none \
+  --apt-recommends true
