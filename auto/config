@@ -13,5 +13,6 @@ lb config noauto \
   --mirror-chroot-security "https://security.ubuntu.com/ubuntu/" \
   --mirror-binary-security "https://security.ubuntu.com/ubuntu/" \
   --keyring-packages ubuntu-keyring \
+  --syslinux-theme "live-build" \
   --bootappend-live "boot=live components quiet splash" \
   --apt-recommends true
